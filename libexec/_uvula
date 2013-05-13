@@ -1,0 +1,21 @@
+export UVULA_REPO="$shome/git"
+
+function get_shell_users {
+  local nm_user
+  for nm_user in $(getent passwd | grep ':/home' | cut -d: -f1); do 
+    if [[ -d "/home/$nm_user" ]]; then 
+      echo $nm_user
+    fi
+  done | sort
+
+  echo root
+}
+
+function no_comments {
+  grep -v '^#' || true
+}
+
+function no_blanks {
+  grep -v '^[      ]*$' || true
+}
+
