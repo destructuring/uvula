@@ -15,7 +15,7 @@ shome="$(cd -P -- "$(dirname -- "$BASH_SOURCE")/.." && pwd -P)"
 source "$shome/libexec/_jason"
 
 # entry point
-function what {
+function main {
   GIT_REPO="$1"; shift
   GIT_HOST="$1"; shift
   GIT_PORT="$1"; shift
@@ -29,4 +29,4 @@ function what {
   $shome/libexec/context-git-cache "$GIT_HOST" "$GIT_PORT" git push origin master
 }
 
-require uvula "$BASH_SOURCE" "$@"
+require sub "$BASH_SOURCE" "$@"
