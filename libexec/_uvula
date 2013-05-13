@@ -1,3 +1,5 @@
+#!/bin/bash
+
 export UVULA_REPO="$shome/git"
 
 function get_shell_users {
@@ -20,11 +22,16 @@ function no_blanks {
 }
 
 function main {
-  what
+  local pth_what="$1"; shift
 
-  shift
+  local pth_output="$(basename "$pth_what")"
+  pth_output="$UVULA_REPO/${pth_output#what-}"
+
+  logger_info "running $pth_what"
+  what >$pth_output
+
   if [[ "$#" > 0 ]]; then
-    "$shome/bin/whats" "$@"
+    exec "$shome/bin/whats" "$@"
   fi
 }
 

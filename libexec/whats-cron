@@ -16,8 +16,7 @@ source "$shome/libexec/_jason"
 function what {
   local nm_user
   for nm_user in $(get_shell_users); do
-    logger_info "crontab for $nm_user"
-    { sudo -u "$nm_user" crontab -l || true; } | no_comments | no_blanks
+    { sudo -u "$nm_user" crontab -l 2>&1 || true; } | no_comments | no_blanks
   done
 }
 
