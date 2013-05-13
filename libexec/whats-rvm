@@ -1,0 +1,34 @@
+#!/bin/bash
+
+#/ NAME
+#/     whats-cron -- dump of cron jobs
+#/
+#/ SYNOPSIS
+#/     whats-cron
+
+# figure out the project root under which bin, lib live
+shome="$(cd -P -- "$(dirname -- "$BASH_SOURCE")/.." && pwd -P)"
+
+# load a jason bourne library
+source "$shome/libexec/_jason"
+
+# entry point
+function what {
+  mark_output
+
+  PATH=$PATH:/usr/local/rvm/bin
+
+  mark_log "rvm"
+  local tmp_rvm="$(mktemp -t XXXXXX)"
+  rvm list | no_comments | no_blanks | grep -v "rvm rubies" | sed 's#\s#. #' | awk '{print $1, $2, $3, $4, $5, $1}' | sort -k2 | awk '{print $2, $3, $4, $5, $6}' | sed 's#[ 	]*\.$##' | tee $tmp_rvm
+
+  local nm_ruby
+  for nm_ruby in $(cat $tmp_rvm | awk '{print $1}'); do
+    mark_log "$nm_ruby"
+    rvm-exec "$nm_ruby" bundle --version 2>&1
+  done
+
+  rm -f $tmp_rvm
+}
+
+require uvula "$BASH_SOURCE" "$@"
