@@ -1,5 +1,3 @@
-for HOST in "$@"; do 
-  REPO="uvula/$HOST" PORT=55555
-  (mkdir -p $HOME/$REPO; cd $HOME/$REPO; git init --bare)
-  br ssh $HOST -- -t -A -R $PORT:localhost:22 "git clone git@github.com:destructuring/uvula; cd uvula; git pull; bin/collect uvula/$HOST $LOGNAME@localhost $PORT different cron ifconfig mounted running rvm users"
+for HOST in "$@"; do
+  br ssh $HOST -- -t -A -R 55555:localhost:22 "git clone git@github.com:destructuring/uvula; cd uvula; git pull; bin/collect uvula/$HOST $LOGNAME@localhost 55555 different cron ifconfig mounted running rvm users"
 done
