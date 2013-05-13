@@ -1,0 +1,12 @@
+#!/bin/bash
+
+export GIT_HOST="$1"; shift
+export GIT_PORT="$1"; shift
+
+export GIT_SSH=$(mktemp -t XXXXXX)
+trap "rm -f $GIT_SSH" EXIT
+
+printf "#!/bin/bash\n%s\n" 'host="$1"; shift; exec ssh -p ${GIT_PORT:-22} -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ${GIT_HOST:-$host} "$@"' > $GIT_SSH
+chmod 755 $GIT_SSH
+
+"$@"
