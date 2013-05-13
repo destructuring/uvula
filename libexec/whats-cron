@@ -11,10 +11,9 @@ shome="$(cd -P -- "$(dirname -- "$BASH_SOURCE")/.." && pwd -P)"
 
 # load a jason bourne library
 source "$shome/libexec/_jason"
-require uvula
 
 # entry point
-function main {
+function what {
   local nm_user
   for nm_user in $(get_shell_users); do
     logger_info "crontab for $nm_user"
@@ -22,4 +21,4 @@ function main {
   done
 }
 
-require sub "$BASH_SOURCE" "$@"
+require uvula "$BASH_SOURCE" "$@"

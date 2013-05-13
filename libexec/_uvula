@@ -19,3 +19,8 @@ function no_blanks {
   grep -v '^[      ]*$' || true
 }
 
+function main {
+  what "$@"
+}
+
+require sub "$BASH_SOURCE" "$@"

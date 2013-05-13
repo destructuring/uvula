@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #/ NAME
-#/     whats-TODO -- TODO
+#/     whats-mounted -- locally mounted volumes
 #/
 #/ SYNOPSIS
-#/     whats-TODO
+#/     whats-mounted
 
 # figure out the project root under which bin, lib live
 shome="$(cd -P -- "$(dirname -- "$BASH_SOURCE")/.." && pwd -P)"
@@ -14,6 +14,7 @@ source "$shome/libexec/_jason"
 
 # entry point
 function what {
+  df -kl | tail -n +2 | sort -k6
 }
 
 require uvula "$BASH_SOURCE" "$@"
