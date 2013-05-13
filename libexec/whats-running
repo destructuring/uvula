@@ -14,10 +14,7 @@ source "$shome/libexec/_jason"
 
 function boring_processes {
   cat <<EOF
-  grep sort egrep tail ps atd -bash cron dbus-daemon dhclient3 getty init
-  master mountall ntpd pickup qmgr rsyslogd sshd tlsmgr udevd
-  upstart-socket-bridge upstart-udev-bridge whoopsie trivial-rewrite sh local
-  cleanup acpid sleep bash CRON
+  grep sort egrep tail ps -bash cron sshd sh sleep bash CRON
 EOF
 }
 
