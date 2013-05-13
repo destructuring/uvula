@@ -2,3 +2,4 @@
 remotes:
   primary: git@github.com:destructuring/uvula
   secondary: git@bitbucket.org:destructuring/uvula
+  sh: git@github.com:destructuring/jason
