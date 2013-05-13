@@ -1,0 +1,4 @@
+---
+remotes:
+  primary: git@github.com:destructuring/uvula
+  secondary: git@bitbucket.org:destructuring/uvula
