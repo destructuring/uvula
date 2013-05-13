@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#/ NAME
+#/     whats-mounted -- locally mounted volumes
+#/
+#/ SYNOPSIS
+#/     whats-mounted
+
+# figure out the project root under which bin, lib live
+shome="$(cd -P -- "$(dirname -- "$BASH_SOURCE")/.." && pwd -P)"
+
+# load a jason bourne library
+source "$shome/libexec/_jason"
+
+# entry point
+function what {
+  ifconfig -a
+}
+
+require uvula "$BASH_SOURCE" "$@"
