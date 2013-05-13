@@ -26,7 +26,7 @@ function main {
   cd $shome/git
   git remote rm origin || true
   git remote add origin "git@github.com:$GIT_REPO"
-  ssh -p ${GIT_PORT} -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "[[ -f $GIT_REPO/HEAD ]] || { mkdir -p $GIT_REPO; cd $GIT_REPO; git init --bare; }"
+  ssh -p ${GIT_PORT} -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $GIT_HOST "[[ -f $GIT_REPO/HEAD ]] || { mkdir -p $GIT_REPO; cd $GIT_REPO; git init --bare; }"
   $shome/libexec/context-git-cache "$GIT_HOST" "$GIT_PORT" git push origin master
 
 }
