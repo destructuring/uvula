@@ -17,11 +17,13 @@ function what {
   PATH=$PATH:/usr/local/rvm/bin
 
   local tmp_rvm="$(mktemp -t XXXXXX)"
-  rvm list | no_comments | no_blanks | grep -v "rvm rubies" | sed 's#\s#. #' | awk '{print $1, $2, $3, $4, $5, $1}' | sort -k2 | awk '{print $2, $3, $4, $5, $6}' | sed 's#[ 	]*\.$##' | tee $tmp_rvm
+  rvm list | no_comments | no_blanks | grep -v "rvm rubies" | sed 's#\s#. #' | awk '{print $1, $2, $3, $4, $5, $1}' | sort -k2 | awk '{print $2, $3, $4, $5, $6}' | sed 's#[ 	]*\.$##' > $tmp_rvm
+  
+  sed "s#^#rvm: #" "$tmp_rvm" 
 
   local nm_ruby
   for nm_ruby in $(cat $tmp_rvm | awk '{print $1}'); do
-    rvm-exec "$nm_ruby" bundle --version 2>&1 | sed "s#^#${nm_ruby}#"
+    rvm-exec "$nm_ruby" bundle --version 2>&1 | sed "s#^#${nm_ruby}: #"
   done
 
   rm -f $tmp_rvm
