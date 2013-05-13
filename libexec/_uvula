@@ -25,7 +25,7 @@ function main {
   local pth_what="$1"; shift
 
   local pth_output="$(basename "$pth_what")"
-  pth_output="$UVULA_REPO/${pth_output#what-}"
+  pth_output="$UVULA_REPO/${pth_output#whats-}"
 
   logger_info "running $pth_what"
   what >$pth_output
