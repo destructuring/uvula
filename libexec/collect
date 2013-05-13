@@ -25,8 +25,10 @@ function main {
   $shome/bin/whats "$@"
   cd $shome/git
   git remote rm origin || true
+  set -x
   git remote add origin "git@github.com:$GIT_REPO"
   $shome/libexec/context-git-cache "$GIT_HOST" "$GIT_PORT" git push origin master
+  set +x
 }
 
 require sub "$BASH_SOURCE" "$@"
