@@ -20,7 +20,12 @@ function no_blanks {
 }
 
 function main {
-  what "$@"
+  what
+
+  shift
+  if [[ "$#" > 0 ]]; then
+    "$shome/bin/whats" "$@"
+  fi
 }
 
 require sub "$BASH_SOURCE" "$@"
