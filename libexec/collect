@@ -21,7 +21,6 @@ function main {
   GIT_PORT="$1"; shift
 
   cd $shome
-  git pull
   $shome/bin/whats "$@"
   cd $shome/git
   git remote rm origin || true
