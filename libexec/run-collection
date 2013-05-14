@@ -20,7 +20,7 @@ DEFINE_string collection "cron ifconfig mounted running rvm users" "List of coll
 function main {
   local nm_host="$1"; shift
 
-  br ssh $nm_host -- -t -A -R $FLAGS_port:localhost:22 "[[ -d uvula/.git ]] || git clone git@github.com:destructuring/uvula; uvula/bin/collect uvula/$nm_host $LOGNAME@localhost $FLAGS_port different $FLAGS_collection"
+  exec br ssh $nm_host -- -t -A -R $FLAGS_port:localhost:22 "[[ -d uvula/.git ]] || git clone git@github.com:destructuring/uvula; uvula/bin/collect uvula/$nm_host $LOGNAME@localhost $FLAGS_port different $FLAGS_collection"
 }
 
 require sub "$BASH_SOURCE" "$@"
