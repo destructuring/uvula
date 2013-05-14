@@ -22,7 +22,7 @@ function main {
 
   local d='$'
   local q='"'
-  exec br ssh $nm_host -- -t -A -R $FLAGS_port:localhost:22 "{ export GIT_SSH=${d}(mktemp -t XXXXXX); printf ${q}#!/bin/bash -x\\nexec ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no \\${q}\\${d}@\\${q}\\n${q} > ${d}GIT_SSH; chmod 755 ${d}GIT_SSH;}; [[ -d uvula/.git ]] || git clone ssh://$LOGNAME@localhost:$FLAGS_port$shome uvula; cd uvula; git pull; bin/collect $shome/work/$nm_host $LOGNAME@localhost $FLAGS_port different $FLAGS_collection; rm -f ${d}GIT_SSH"
+  exec br ssh $nm_host -- -t -A -R $FLAGS_port:localhost:22 "{ export GIT_SSH=${d}(mktemp -t XXXXXX); printf ${q}#!/bin/bash -x\\nexec ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no \\${q}\\${d}@\\${q}\\n${q} > ${d}GIT_SSH; chmod 755 ${d}GIT_SSH;}; [[ -d uvula/.git ]] || git clone ssh://$LOGNAME@localhost:$FLAGS_port$shome uvula; cd uvula; git remote rm origin; git remote add origin ssh://$LOGNAME@localhost:$FLAGS_port$shome; git pull; bin/collect $shome/work/$nm_host $LOGNAME@localhost $FLAGS_port different $FLAGS_collection; rm -f ${d}GIT_SSH"
 }
 
 require sub "$BASH_SOURCE" "$@"
