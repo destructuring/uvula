@@ -22,7 +22,6 @@ function main {
   git add .
   git add -u .
   git commit -m "whats $*"
-  git diff 'HEAD@{1}'
   cd $shome
 }
 
