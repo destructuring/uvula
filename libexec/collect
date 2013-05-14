@@ -21,7 +21,7 @@ function main {
   GIT_PORT="$1"; shift
 
   cd $shome
-  $shome/bin/whats "$@"
+  runmany 4 1 "$(printf '%s $1' "$shome/bin/whats")" "$@"
   cd $shome/git
   git remote rm origin || true
   git remote add origin ssh://$GIT_HOST:$GIT_PORT$GIT_REPO
