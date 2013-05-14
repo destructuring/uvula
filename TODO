@@ -1,3 +1,0 @@
-for HOST in "$@"; do
-  br ssh $HOST -- -t -A -R 55555:localhost:22 "[[ -d uvula/.git ]] || git clone git@github.com:destructuring/uvula; cd uvula; bin/collect uvula/$HOST $LOGNAME@localhost 55555 different cron ifconfig mounted running rvm users"
-done

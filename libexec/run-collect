@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#/ NAME
+#/     run-collect -- run a collect session
+#/
+#/ SYNOPSIS
+#/     run-collect host
+
+# figure out the project root under which bin, lib live
+shome="$(cd -P -- "$(dirname -- "$BASH_SOURCE")/.." && pwd -P)"
+
+# load a jason bourne library
+source "$shome/libexec/_jason"
+
+# options
+DEFINE_integer port "55555" "Remote port to forward to local ssh"
+DEFINE_string collection "cron ifconfig mounted running rvm users" "List of collectors to run"
+
+# entry point
+function main {
+  local nm_host="$1"; shift
+
+  br ssh $nm_host -- -t -A -R $FLAGS_port:localhost:22 "[[ -d uvula/.git ]] || git clone git@github.com:destructuring/uvula; uvula/bin/collect uvula/$nm_host $LOGNAME@localhost $FLAGS_port different $FLAGS_collection"
+}
+
+require sub "$BASH_SOURCE" "$@"
