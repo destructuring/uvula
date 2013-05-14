@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #/ NAME
-#/     run-collect -- run a collect session
+#/     run-collection -- collect information about a host
 #/
 #/ SYNOPSIS
-#/     run-collect host
+#/     bin/run collection HOST
 
 # figure out the project root under which bin, lib live
 shome="$(cd -P -- "$(dirname -- "$BASH_SOURCE")/.." && pwd -P)"
