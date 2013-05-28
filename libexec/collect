@@ -21,13 +21,18 @@ function main {
   GIT_HOST="$1"; shift
   GIT_PORT="$1"; shift
 
+  if [[ ! -d "$shome/git/.git" ]]; then
+    mkdir -p $shome/git
+    cd $shome/git
+    git init
+  fi
+
   cd $shome
   for a in "$@"; do
     env NO_LOG4SH=1 $shome/bin/whats "$a"
   done
 
   cd $shome/git
-  git init || true
   git add .
   git add -u .
   git commit -m "whats $*" > /dev/null 2>&1
