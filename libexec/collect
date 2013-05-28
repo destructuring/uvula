@@ -16,13 +16,22 @@ source "$shome/libexec/_jason"
 
 # entry point
 function main {
+  logger_info "ARGS: $*"
   GIT_REPO="$1"; shift
   GIT_HOST="$1"; shift
   GIT_PORT="$1"; shift
 
   cd $shome
-  runmany 4 1 "$(printf '%s $1' "$shome/bin/whats")" "$@"
+  for a in "$@"; do
+    $shome/bin/whats "$a"
+  done
+
   cd $shome/git
+  git init || true
+  git add .
+  git add -u .
+  git commit -m "whats $*" > /dev/null 2>&1
+
   git remote rm origin || true
   git remote add origin ssh://$GIT_HOST:$GIT_PORT$GIT_REPO
   
