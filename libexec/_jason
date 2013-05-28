@@ -98,6 +98,10 @@ function parse_command_line {
 }
 
 function configure_logging {
+  if [[ -n "${NO_LOG4SH:-}" ]]; then
+    return 0
+  fi
+
   # load log4sh (disabling properties file warning) and clear the default
   # configuration
   LOG4SH_CONFIGURATION='none' require 'log4sh'

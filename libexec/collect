@@ -23,7 +23,7 @@ function main {
 
   cd $shome
   for a in "$@"; do
-    $shome/bin/whats "$a"
+    env NO_LOG4SH=1 $shome/bin/whats "$a"
   done
 
   cd $shome/git
