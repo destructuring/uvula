@@ -14,7 +14,7 @@ source "$shome/libexec/_jason"
 
 # options
 DEFINE_integer port "55555" "Remote port to forward to local ssh"
-DEFINE_string collection "cron ifconfig mounted running rvm users" "List of collectors to run"
+DEFINE_string collection "cron ifconfig mounted running rvm users stackname" "List of collectors to run"
 
 # entry point
 function main {

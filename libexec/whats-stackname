@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#/ NAME
+#/     whats-stackname -- get the cloud formation stack name
+#/
+#/ SYNOPSIS
+#/     whats-stackname
+
+# figure out the project root under which bin, lib live
+shome="$(cd -P -- "$(dirname -- "$BASH_SOURCE")/.." && pwd -P)"
+
+# load a jason bourne library
+source "$shome/libexec/_jason"
+
+# entry point
+function what {
+  cat /etc/chef/stack_name
+}
+
+require uvula "$BASH_SOURCE" "$@"
